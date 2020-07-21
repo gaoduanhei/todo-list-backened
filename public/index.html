@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="getData()">获取数据</button>
+</body>
+<script>
+    function getData() {
+        // const query = `
+        // query  Account($city:String){
+        //     account{
+        //         age
+        //         sex
+        //         name
+            
+        //         salary(city:$city) 
+        //     }
+        // }
+        // `
+
+        // const query = `
+        //     query Account(){
+        //         account(){
+        //             Salary($city:String){
+        //             salary(city:$city)    
+        //         }
+        //     }`
+        const query =`
+
+            query($login:String!){
+                user(login:$login){
+                    id
+                }
+            }
+        `
+
+
+        const variables = { city: "南京" }
+
+        fetch('https://developer.github.com/v4/explorer/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: variables
+            })
+        }).then((res) => res.json)
+            .then(json => {
+                console.log(data);
+            })
+    }
+</script>
+
+</html>
